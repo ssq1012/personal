@@ -1,9 +1,8 @@
 package com.example.demo.pojo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -13,20 +12,39 @@ import java.io.Serializable;
 @TableName("student_info")
 public class Student implements Serializable {
     private static final long serialVersionUID = -3954607291890783350L;
-    private String name ;
+    @TableField(value = "stu_name")
+    @ExcelProperty("姓名")
+    private String stuName;
+    @ExcelProperty("性别")
     private String sex;
+    @ExcelProperty("年龄")
     private Integer age;
+    @ExcelProperty("评论")
+    private String commets;
+    @ExcelProperty("序号")
+    private Integer number;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public Integer getNumber() {
+        return number;
     }
 
-    public String getName() {
-        return name;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCommets() {
+        return commets;
+    }
+
+    public void setCommets(String commets) {
+        this.commets = commets;
+    }
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName;
     }
 
     public String getSex() {

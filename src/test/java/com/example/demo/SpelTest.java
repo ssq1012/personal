@@ -42,14 +42,14 @@ public class SpelTest {
     public void spelObjectTest(){
         Student st1 = new Student();
         Student st2 = new Student();
-        st1.setName("xiaoming");
-        st2.setName("xiaohong");
+        st1.setStuName("xiaoming");
+        st2.setStuName("xiaohong");
         SpelExpressionParser parser = new SpelExpressionParser();
         StandardEvaluationContext standardEvaluationContext = new StandardEvaluationContext(st2);
         standardEvaluationContext.setVariable("newName","la");
         parser.parseExpression("Name = #newName").getValue(standardEvaluationContext);
 //        parser.parseExpression("name").setValue(standardEvaluationContext,"ll");
-        System.out.println(st2.getName());
+        System.out.println(st2.getStuName());
     }
 
     @Test

@@ -7,4 +7,8 @@ public interface TestService {
     String getStudent(String name);
 
     String getGoods(String name);
+
+    void createStudent(String count);
+
+    void exportStudent(String count);
 }

@@ -1,14 +1,14 @@
 package com.example.demo;
 
-import org.apache.http.client.utils.DateUtils;
-import org.assertj.core.util.DateUtil;
+
+import com.alibaba.fastjson.JSON;
+import com.example.demo.pojo.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -61,11 +60,22 @@ public class StreamTest {
 
     @Test
     public void testDate2(){
-         List<String> list = new ArrayList<>();
-         list.add("1");
-         list.add("2");
-        String remove = list.remove(0);
-        System.out.println(remove);
+        List<String> dateList = new ArrayList<>();
+        LocalDate preDate = LocalDate.of(2020,1,1);
+        LocalDate now = LocalDate.now();
+        Period between = Period.between(preDate, now);
+        long months = between.toTotalMonths();
+        int year = preDate.getYear();
+        int x = 0;
+        for (int i = 1; i < months ; i++) {
+            int j = i;
+            if (j %12 == 0){
+                year = year + 1;
+                x = x + 12;
+            }
+            dateList.add(year + "-" + (j-x+1));
+        }
+        System.out.println("1");
     }
 
 
@@ -82,5 +92,30 @@ public class StreamTest {
         System.out.println(from);
     }
 
+    @Test
+    public void  testNum(){
+        String cidr = "10.3.1.0/24";
+        String[] split = cidr.split("/");
+        //位数
+        String placeNum  = split[1];
+        int num = Integer.parseInt(placeNum) / 8;
+        //默认往后移8位
+        String temp = split[0];
+        String[] split1 = temp.split("\\.");
+        split1[num] = "1";
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(split1[0]).append(".").append(split1[1]).append(".")
+                .append(split1[2]).append(".").append(split1[3]).append("/").append(num * 8 + 8);
+        System.out.println(buffer);
+    }
 
+
+    @Test
+    public void testTime(){
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime localDateTime = now.minusDays(90);
+        String format = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+        System.out.println(format);
+        System.out.println(new Date());
+    }
 }

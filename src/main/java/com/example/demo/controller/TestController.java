@@ -16,6 +16,12 @@ public class TestController {
     @Autowired
     TestService testService;
 
+    @RequestMapping("/test")
+    public String test()
+    {
+        return "hello world!";
+    }
+
     @RequestMapping("/getMsg")
     public String getMsg()
     {
@@ -26,6 +32,18 @@ public class TestController {
     public String getStudent(@RequestParam("name") String name)
     {
         return testService.getStudent(name);
+    }
+
+    @RequestMapping(value = "/createStudent", method = RequestMethod.GET)
+    public void createStudent(@RequestParam("count") String count)
+    {
+        testService.createStudent(count);
+    }
+
+    @RequestMapping(value = "/exportStudent", method = RequestMethod.GET)
+    public void exportStudent(@RequestParam("count") String count)
+    {
+        testService.exportStudent(count);
     }
 
     @PostMapping("/getGoods")
